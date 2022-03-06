@@ -1,0 +1,94 @@
+// padding-left: 25%;
+// padding-right: 25%;
+
+
+
+.navbar{
+    position: block;
+    background-color: #233a50;
+    margin: 0;
+    padding: 0;
+    border-radius: 1.5rem;
+    display: flex;
+    width: 50%;
+    height: max-content;
+
+
+    .left-half{
+        display: flex;
+        margin-right: auto;
+
+        .logo{
+            width: 119px; height: 58px;
+            background-image: url("../../../assets/Images/logo1.png"); 
+            background-repeat: no-repeat;;
+        }
+    }
+
+    .right-half{
+        display: flex;
+        margin-left: auto;
+        padding: 1rem 1rem;
+
+        .r-item{
+            display: block;
+            text-align: center;
+            height: 100%;
+
+            #search-bar{
+                display: block;
+                height: 100%;
+                background-color: inherit;
+                text-decoration: none;
+                color: antiquewhite;
+                //outline: none;
+                //border: none;
+                margin-right: 1rem;
+            }
+
+            // #search-bar::-webkit-input-placeholder { 
+            //     opacity: 1; 
+            //     -webkit-transition: opacity .5s; 
+            //     transition: opacity .5s; 
+            // }
+                
+            // #search-bar:focus::-webkit-input-placeholder { 
+            //     opacity: 0; 
+            // }
+
+            #search-bar::placeholder{
+                color: antiquewhite;
+            }
+
+            #search-bar:focus{
+                outline: none;
+            }
+
+            .nav-button{
+                display: block;
+                border-radius: 1.5rem;
+                width: 100%;
+                height: 100%;
+                background-color: inherit;
+                border: none;
+
+                a{
+                    text-decoration: none;                
+                    //padding: 1.6rem 1.5rem 0 0.5rem;
+                    color:antiquewhite;
+                    font-size: 1.6rem;
+                }
+
+
+            }
+            .nav-button:hover{
+                cursor:pointer;
+                border: solid 0.5px red;
+            }
+
+            #sign-up-button{
+                background-color: red !important; 
+            }
+        }
+    }
+}
