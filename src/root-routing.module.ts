@@ -13,6 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
     data: { preload: true },
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    data: { preload: true },
+  },
   { path: 'error', component: ErrorComponent },
   { path: '**', redirectTo: '/error', pathMatch: 'full' },
 ];

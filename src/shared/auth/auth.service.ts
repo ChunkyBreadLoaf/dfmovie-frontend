@@ -1,12 +1,10 @@
+import { JWT, LoginInfoDto, ResponseResult, User } from '../models/auth.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { API_BASE_URL } from '../shared.tokens';
 import { HttpClient } from '@angular/common/http';
-import { JWT, LoginInfoDto, ResponseResult, User } from '../models/auth.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly authRemoteUrl = `${this.baseURL}/auth`
   private readonly currentUserSubject: BehaviorSubject<User | null>;
@@ -42,11 +40,9 @@ export class AuthService {
 }
 
 function parseJwt (token: string): Record<string, any> {
-  let base64Url = token.split('.')[1];
-  let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
 
   return JSON.parse(jsonPayload);
 };
