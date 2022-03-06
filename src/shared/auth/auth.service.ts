@@ -9,19 +9,19 @@ import { JWT, LoginInfoDto, ReponseResult, User } from '../models/user';
 })
 export class AuthService {
   private readonly authRemoteUrl = `${this.baseURL}/auth`
-  private readonly currentUserSubject: BehaviorSubject<User>;
+  private readonly currentUserSubject: BehaviorSubject<User | null>;
 
-  readonly currentUser$: Observable<User>;
+  readonly currentUser$: Observable<User | null>;
 
   constructor(
     @Inject(API_BASE_URL) private readonly baseURL: string,
     private readonly http: HttpClient
   ) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
+    this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser')!));
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
-  get currentUser(): User {
+  get currentUser(): User | null {
     return this.currentUserSubject.value;
   }
 
@@ -34,6 +34,11 @@ export class AuthService {
       localStorage.setItem('currentUser', stringifiedUser);
     });
   }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+}
 }
 
 function parseJwt (token: string): Record<string, any> {
