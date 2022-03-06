@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { API_BASE_URL } from '../shared.tokens';
 import { HttpClient } from '@angular/common/http';
-import { JWT, LoginInfoDto, ReponseResult, User } from '../models/user';
+import { JWT, LoginInfoDto, ResponseResult, User } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   login(loginInfo: LoginInfoDto): void {
-    this.http.post<ReponseResult<JWT>>(`${this.authRemoteUrl}/login`, loginInfo).subscribe(({ data }) => {
+    this.http.post<ResponseResult<JWT>>(`${this.authRemoteUrl}/login`, loginInfo).subscribe(({ data }) => {
       const { access_token } = data;
       const { sub, username, permissions } = parseJwt(access_token);
       const stringifiedUser = JSON.stringify({ token: access_token, _id: sub, username, permissions });
@@ -38,7 +38,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-}
+  }
 }
 
 function parseJwt (token: string): Record<string, any> {

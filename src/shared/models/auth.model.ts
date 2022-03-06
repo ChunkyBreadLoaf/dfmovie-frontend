@@ -10,7 +10,7 @@ export type LoginInfoDto = {
   password: string;
 }
 
-export type ReponseResult<T> = {
+export type ResponseResult<T> = {
   statusCode: number;
   data: T;
   message: string;
