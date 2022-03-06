@@ -19,7 +19,8 @@ import { JwtInterceptor } from './shared/interceptors/jwt-auth.interceptor';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor
+      useClass: JwtInterceptor,
+      multi: true
     }
   ],
   bootstrap: [RootComponent],
