@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 import { API_BASE_URL } from './shared/shared.tokens';
 import { environment } from './environments/environment';
 import { ErrorComponent } from './error/error.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './shared/interceptors/jwt-auth.interceptor';
 
 @NgModule({
   declarations: [RootComponent, ErrorComponent],
@@ -15,6 +17,10 @@ import { ErrorComponent } from './error/error.component';
       provide: API_BASE_URL,
       useFactory: () => environment.remoteServiceBaseUrl,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor
+    }
   ],
   bootstrap: [RootComponent],
 })
