@@ -1,5 +1,4 @@
-// padding-left: 25%;
-// padding-right: 25%;
+
 
 
 
@@ -12,6 +11,7 @@
     display: flex;
     width: 50%;
     height: max-content;
+    left : 30%;
 
 
     .left-half{
@@ -83,7 +83,7 @@
             }
             .nav-button:hover{
                 cursor:pointer;
-                border: solid 0.5px red;
+                outline: 0.5px red;
             }
 
             #sign-up-button{
