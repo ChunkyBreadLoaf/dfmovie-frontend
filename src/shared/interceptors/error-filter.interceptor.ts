@@ -14,7 +14,11 @@ export class ErrorFilterInterceptor implements HttpInterceptor {
         const { error } = res;
         const { statusCode, message } = error;
 
-        this.router.navigate(['/error'], { queryParams: { statusCode, message }});
+        if (statusCode === 401 || statusCode === 403 || statusCode === 500) {
+          this.router.navigate(['/error'], {
+            queryParams: { statusCode, message },
+          });
+        }
 
         return throwError(() => new Error(message));
       })

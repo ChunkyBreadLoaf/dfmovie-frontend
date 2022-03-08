@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/shared/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private readonly ngDestroy$: Subject<void>;
@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     this.loginForm = formBuilder.group({
       username: [''],
-      password: ['']
-    })
+      password: [''],
+    });
     this.ngDestroy$ = new Subject();
   }
 
@@ -34,12 +34,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.authService.operationCompletionNotifer$.subscribe(() => {
-      this.router.navigate([returnURL]);
-    })
+    this.authService.operationCompletionNotifer$
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe(() => {
+        this.router.navigate([returnURL]);
+      });
   }
 
   ngOnDestroy(): void {
-    this.ngDestroy$.next()
+    this.ngDestroy$.next();
   }
 }
