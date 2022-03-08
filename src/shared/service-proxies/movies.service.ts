@@ -1,18 +1,12 @@
+import { CreateMovieDto, MovieDto, UpdateMovieDto, } from '../models/movies.model';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { ProxyServiceBase } from '../models/proxyBase.interface';
 import { ResponseResult } from '../models/auth.model';
 import { API_BASE_URL } from '@tokens';
 import { HttpClient } from '@angular/common/http';
-import {
-  CreateMovieDto,
-  MovieDto,
-  UpdateMovieDto,
-} from '../models/movies.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class MoviesService implements ProxyServiceBase {
   private readonly movieRemoteService = `${this.baseURL}/movies`;
   private readonly movies: BehaviorSubject<MovieDto[]>;

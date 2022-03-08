@@ -1,3 +1,5 @@
+import { CategoryDto } from "./categories.model";
+
 export type CreateMovieDto = {
   title: string;
   poster: string;
@@ -22,5 +24,5 @@ export type MovieDto = {
   description: string;
   poster: string;
   title: string;
-  categories: string[];
+  categories: CategoryDto[];
 };
