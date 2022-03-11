@@ -20,7 +20,7 @@ export class ErrorFilterInterceptor implements HttpInterceptor {
           });
         }
 
-        return throwError(() => new Error(message));
+        return throwError(() => new Error(JSON.stringify(error)));
       })
     );
   }

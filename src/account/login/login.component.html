@@ -1,5 +1,24 @@
-<form [formGroup]="loginForm" (ngSubmit)="onFormSubmit(loginForm.value)">
-  <input type="text" formControlName="username">
-  <input type="password" formControlName="password">
-  <button type="submit">Login</button>
-</form>
+<div class="login-wrapper">
+  <div class="login-title">WELCOME BACK</div>
+  <div class="error-message" [style.opacity]="isInvalid ? 1 : 0">
+    <p-message
+      severity="error"
+      styleClass="message"
+      [style]="{width: '100%'}"
+      text="Invalid username or password"
+    ></p-message>
+  </div>
+  <app-login-form></app-login-form>
+  <div class="back-to-app">
+    <a routerLink="/">Cancel and return to website</a>
+  </div>
+</div>
+
+<div class="create-account">
+  <span>Dont have an account? <a href="">Create an acccount.</a></span>
+</div>
+
+<div class="login-background">
+  <div class="overlay"></div>
+  <img src="../../assets/Images/background.jpg" alt="">
+</div>
