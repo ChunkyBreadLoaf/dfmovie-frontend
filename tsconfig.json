@@ -24,7 +24,8 @@
     ],
     "paths": {
       "@tokens": ["src/shared/shared.tokens"],
-      "@services": ["src/shared/service-proxies"]
+      "@services": ["src/shared/service-proxies"],
+      "@assets": ["src/assets/*"]
     }
   },
   "angularCompilerOptions": {

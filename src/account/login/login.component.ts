@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/shared/auth/auth.service';
@@ -12,7 +12,7 @@ import { AuthService } from 'src/shared/auth/auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
   private readonly ngDestroy$: Subject<void>;
 
-  loginForm: FormGroup;
+  isInvalid: boolean;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -20,15 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {
-    this.loginForm = formBuilder.group({
-      username: [''],
-      password: [''],
-    });
     this.ngDestroy$ = new Subject();
-  }
-
-  onFormSubmit(value: any) {
-    this.authService.login(value);
+    this.isInvalid = false;
   }
 
   ngOnInit(): void {
@@ -36,7 +29,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.authService.operationCompletionNotifer$
       .pipe(takeUntil(this.ngDestroy$))
-      .subscribe(() => {
+      .subscribe(({ statusCode }) => {
+        if (statusCode === 406) {
+          this.isInvalid = true;
+
+          return;
+        }
+
         this.router.navigate([returnURL]);
       });
   }

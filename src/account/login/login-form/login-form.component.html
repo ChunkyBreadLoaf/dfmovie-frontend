@@ -1,0 +1,14 @@
+<form [formGroup]="loginForm" class="login-form" (ngSubmit)="onFormSubmit(loginForm.value)">
+  <div class="form-group">
+    <label class="label" for="username-input">Username</label>
+    <input tabindex="1" id="username-input" type="text" formControlName="username" pInputText>
+  </div>
+  <div class="form-group">
+    <div class="label">
+      <label for="password-input">Password</label>
+      <a href="javascript:void(0)">Forgot?</a>
+    </div>
+    <input tabindex="2" id="password-input" type="password" formControlName="password" pInputText>
+  </div>
+  <button tabindex="3" pButton type="submit" class="p-button-danger" label="Login to BlockBuster"></button>
+</form>
