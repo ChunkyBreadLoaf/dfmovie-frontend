@@ -27,6 +27,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  set currentUser(user: User | null) {
+    this.currentUserSubject.next(user);
+  }
+
   login(loginInfo: LoginInfoDto): void {
     this.http
       .post<ResponseResult<JWT>>(`${this.authRemoteUrl}/login`, loginInfo)
