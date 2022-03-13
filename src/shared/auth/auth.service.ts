@@ -1,5 +1,5 @@
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { JWT, LoginInfoDto, ResponseResult, User } from '../models/auth.model';
-import { BehaviorSubject, catchError, Observable, Subject, tap } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { API_BASE_URL } from '../shared.tokens';
 import { HttpClient } from '@angular/common/http';
@@ -34,7 +34,7 @@ export class AuthService {
   login(loginInfo: LoginInfoDto): void {
     this.http
       .post<ResponseResult<JWT>>(`${this.authRemoteUrl}/login`, loginInfo)
-      .pipe(tap(({ statusCode }) => this.notifyComplete({ message: 'login', statusCode })))
+      .pipe(tap(({ statusCode }) => this.notifyComplete({ operation: 'login', statusCode })))
       .subscribe({
         next: ({ data }) => {
           const { access_token } = data;
@@ -46,7 +46,7 @@ export class AuthService {
         error: (err: Error) => {
           const { statusCode } = JSON.parse(err.message);
 
-          this.notifyComplete({ message: 'login', statusCode });
+          this.notifyComplete({ operation: 'login', statusCode });
         }
       });
   }
