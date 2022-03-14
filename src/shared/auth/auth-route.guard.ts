@@ -11,7 +11,8 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
 
     if (!currentUser) {
       // not logged in so redirect to login page with the return url
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+      this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url } });
+
       return false;
     }
 
