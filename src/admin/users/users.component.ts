@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '@services/users.service';
 import { BaseComponent } from '@shared/components/base.component';
 import { User } from '@shared/models/users.model';
-import { dateForatter } from './users.utils';
+import { formatDate } from './users.utils';
 
 @Component({
   selector: 'app-users',
@@ -29,8 +29,8 @@ export class UsersComponent extends BaseComponent implements OnInit {
       const roleNames = (<any[]>roles).map((role) => role.name);
 
       user.roles = roleNames.join(',');
-      user.createdTime = dateForatter(new Date(createdTime));
-      user.updatedTime = dateForatter(new Date(updatedTime));
+      user.createdTime = formatDate(new Date(createdTime));
+      user.updatedTime = formatDate(new Date(updatedTime));
     }
 
     this.users = data;
