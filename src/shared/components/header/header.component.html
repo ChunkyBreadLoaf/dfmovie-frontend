@@ -28,7 +28,7 @@
             </div>
             <div class="r-item">
                 <button class="nav-button" id="log-in-button">
-                    <a href="#">LOGIN</a>
+                    <a routerLink="/account/login">LOGIN</a>
                 </button>
             </div>
             <div class="r-item">
@@ -45,8 +45,12 @@
             <option class="select-items">Genre</option>
         </select>
         <div class="search-area">
-            <i class="pi pi-search"></i>
-            <input id="search-input-field" type="text" placeholder="Search for a movie, TV series or genre that you are looking for...">
+          <app-df-input
+            cssClass="search-input"
+            iconClass="search"
+            iconPosition="left"
+            placeholder="Search for a movie, TV series or genre that you are looking for..."
+          ></app-df-input>
         </div>
     </div>
 </div>

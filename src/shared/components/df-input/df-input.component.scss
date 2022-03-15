@@ -1,0 +1,28 @@
+.input {
+  &-wrapper {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    width: fit-content;
+    height: 100%;
+
+    &.icon-left {
+      flex-direction: row-reverse;
+    }
+
+    input {
+      flex: 1;
+      height: 100%;
+      border: none;
+      background: transparent;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &-icon {
+    padding: 1rem;
+  }
+}

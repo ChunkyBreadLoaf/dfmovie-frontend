@@ -1,0 +1,13 @@
+<div class="input-wrapper {{cssClass || ''}}" [ngClass]="iconPos">
+  <input
+    class="input-field"
+    type="text"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+    (change)="onChanged($event)"
+  >
+  <div class="input-icon">
+    <i class="pi pi-{{iconClass}}" *ngIf="iconClass"></i>
+  </div>
+</div>
