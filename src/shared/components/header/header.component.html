@@ -1,23 +1,52 @@
-<div class="navbar">
-    <div class="left-half">
-        <a href="#" class="logo"></a>     
+<div class="header">
+    <div class="navbar">
+        <div class="left-half">
+            <a href="#" class="logo"></a>
+            <div class="l-item">
+                <button class="nav-button">
+                    <a href="#">Home</a>
+                </button>
+            </div>
+            <div class="l-item">
+                <button class="nav-button">
+                    <a href="#">Movies</a>
+                    <i class="pi pi-angle-down"></i>
+                </button>
+            </div>
+            <div class="l-item">
+                <button class="nav-button">
+                    <a href="#">Genre</a>
+                    <i class="pi pi-angle-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="right-half">
+            <div class="r-item">
+                <button class="nav-button" id="log-in-button">
+                    <a href="#">HELP</a>
+                </button>
+            </div>
+            <div class="r-item">
+                <button class="nav-button" id="log-in-button">
+                    <a href="#">LOGIN</a>
+                </button>
+            </div>
+            <div class="r-item">
+                <button class="nav-button" id="sign-up-button">
+                    <a href="#">SIGN UP</a>
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="right-half">
-        <div class="r-item">
-            <input type="text" id="search-bar" spellcheck="false" placeholder="Search...">
+    <div class="search-bar">
+        <select name="select-area" id="select-area">
+            <option class="select-items">Movies</option>
+            <option class="select-items">Series</option>
+            <option class="select-items">Genre</option>
+        </select>
+        <div class="search-area">
+            <i class="pi pi-search"></i>
+            <input id="search-input-field" type="text" placeholder="Search for a movie, TV series or genre that you are looking for...">
         </div>
-        <div class="r-item">
-            <button class="nav-button" id="log-in-button">
-                <a href="#">LOGIN</a>
-            </button>
-        </div>
-        <div class="r-item">
-            <button class="nav-button" id="sign-up-button">
-                <a href="#">SIGN UP</a>
-            </button>
-        </div>
-    </div>    
+    </div>
 </div>
-
-  
-
