@@ -1,28 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/shared/service-proxies/users.service';
+import { UsersService } from '@services/users.service';
+import { BaseComponent } from '@shared/components/base.component';
+import { User } from '@shared/models/users.model';
+import { formatDate } from './users.utils';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
-  private readonly user = {
-    "firstName": "Lem",
-    "lastName": "Soriano",
-    "email": "admin3@gmail.com",
-    "roles": ["621bad6ef8aeabba9de76d52"],
-    "username": "LemS",
-    "password": "Password01"
-}
+export class UsersComponent extends BaseComponent implements OnInit {
+  users: User[];
 
-  constructor(private readonly userService: UsersService) { }
+  constructor(private readonly userService: UsersService) {
+    super();
+
+    this.users = [];
+  }
 
   ngOnInit(): void {
+    this.initStores();
+    this.userService.findAll();
   }
 
-  onBtnClick(): void {
-    this.userService.update("6224a9640e9965aef511378a", this.user);
+  private processUserResponseData(data: User[]): void {
+    for (const user of data) {
+      const { roles, createdTime, updatedTime } = user;
+      const roleNames = (<any[]>roles).map((role) => role.name);
+
+      user.roles = roleNames.join(',');
+      user.createdTime = formatDate(new Date(createdTime));
+      user.updatedTime = formatDate(new Date(updatedTime));
+    }
+
+    this.users = data;
   }
 
+  private initStores(): void {
+    this.registerStore(this.userService.usersStore$, (data) =>
+      this.processUserResponseData(data)
+    );
+  }
 }

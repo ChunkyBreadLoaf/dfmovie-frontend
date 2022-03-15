@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { ProxyServiceBase } from '../models/proxyBase.interface';
 import { ResponseResult } from '../models/auth.model';
-import { API_BASE_URL } from '../shared.tokens';
+import { API_BASE_URL } from '@tokens';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })

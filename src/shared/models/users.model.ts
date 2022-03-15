@@ -21,8 +21,10 @@ export type UpdateUserDto = {
 export type User = {
   _id: string;
   firstName: string;
+  createdTime: string;
+  updatedTime: string;
   lastName: string;
   email: string;
   username: string;
-  roles: any[];
+  roles: any[] | string;
 }

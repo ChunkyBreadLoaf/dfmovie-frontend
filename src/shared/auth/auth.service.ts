@@ -1,5 +1,5 @@
-import { JWT, LoginInfoDto, ResponseResult, User } from '../models/auth.model';
 import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
+import { JWT, LoginInfoDto, ResponseResult, User } from '../models/auth.model';
 import { Inject, Injectable } from '@angular/core';
 import { API_BASE_URL } from '../shared.tokens';
 import { HttpClient } from '@angular/common/http';
@@ -8,17 +8,17 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   private readonly authRemoteUrl = `${this.baseURL}/auth`
   private readonly currentUserSubject: BehaviorSubject<User | null>;
-  private readonly operationCompletionNotifer: Subject<string>;
+  private readonly operationCompletionNotifer: Subject<Record<string, any>>;
 
   readonly currentUser$: Observable<User | null>;
-  readonly operationCompletionNotifer$: Observable<string>;
+  readonly operationCompletionNotifer$: Observable<Record<string, any>>;
 
   constructor(
     @Inject(API_BASE_URL) private readonly baseURL: string,
     private readonly http: HttpClient
   ) {
     this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser')!));
-    this.operationCompletionNotifer = new Subject<string>();
+    this.operationCompletionNotifer = new Subject<Record<string, any>>();
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.operationCompletionNotifer$ = this.operationCompletionNotifer.asObservable();
   }
@@ -27,16 +27,27 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  set currentUser(user: User | null) {
+    this.currentUserSubject.next(user);
+  }
+
   login(loginInfo: LoginInfoDto): void {
     this.http
       .post<ResponseResult<JWT>>(`${this.authRemoteUrl}/login`, loginInfo)
-      .pipe(tap(() => this.notifyComplete('login')))
-      .subscribe(({ data }) => {
-        const { access_token } = data;
-        const { sub, username, permissions } = parseJwt(access_token);
-        const stringifiedUser = JSON.stringify({ token: access_token, _id: sub, username, permissions });
+      .pipe(tap(({ statusCode }) => this.notifyComplete({ operation: 'login', statusCode })))
+      .subscribe({
+        next: ({ data }) => {
+          const { access_token } = data;
+          const { sub, username, permissions } = parseJwt(access_token);
+          const stringifiedUser = JSON.stringify({ token: access_token, _id: sub, username, permissions });
 
-        localStorage.setItem('currentUser', stringifiedUser);
+          localStorage.setItem('currentUser', stringifiedUser);
+        },
+        error: (err: Error) => {
+          const { statusCode } = JSON.parse(err.message);
+
+          this.notifyComplete({ operation: 'login', statusCode });
+        }
       });
   }
 
@@ -45,7 +56,7 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
-  private notifyComplete(operation: string) {
+  private notifyComplete(operation: Record<string, any>) {
     this.operationCompletionNotifer.next(operation);
   }
 }
