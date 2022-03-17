@@ -1,0 +1,35 @@
+.search-bar {
+  display: flex;
+  text-align: left;
+  width: 117rem;
+  height: 5rem;
+  background-color: $input-background-color;
+  border: 4px solid black;
+
+  #select-area {
+    flex: 1;
+    border: none;
+    border-right: solid 0.1rem;
+    color: $button-text-color;
+    background-color: $input-background-color;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .search-area {
+    flex: 5;
+    background-color: $input-background-color;
+
+    ::ng-deep .search-input {
+      border: none;
+      width: 100%;
+
+      * {
+        font-size: 1.6rem;
+        color: $input-background-text-color;
+      }
+    }
+  }
+}

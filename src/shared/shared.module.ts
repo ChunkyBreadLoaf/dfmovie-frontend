@@ -8,9 +8,10 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './auth/auth.service';
 import { RouterModule } from '@angular/router';
 import { DfInputComponent } from './components/df-input/df-input.component';
+import { HeaderSearchBarComponent } from './components/header-search-bar/header-search-bar.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, DfInputComponent],
+  declarations: [HeaderComponent, FooterComponent, DfInputComponent, HeaderSearchBarComponent],
   imports: [CommonModule, HttpClientModule, RouterModule],
   exports: [HeaderComponent, FooterComponent, DfInputComponent],
 })

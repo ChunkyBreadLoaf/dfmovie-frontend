@@ -1,56 +1,23 @@
-<div class="header">
-    <div class="navbar">
-        <div class="left-half">
-            <a href="#" class="logo"></a>
-            <div class="l-item">
-                <button class="nav-button">
-                    <a href="#">Home</a>
-                </button>
-            </div>
-            <div class="l-item">
-                <button class="nav-button">
-                    <a href="#">Movies</a>
-                    <i class="pi pi-angle-down"></i>
-                </button>
-            </div>
-            <div class="l-item">
-                <button class="nav-button">
-                    <a href="#">Genre</a>
-                    <i class="pi pi-angle-down"></i>
-                </button>
-            </div>
-        </div>
-        <div class="right-half">
-            <div class="r-item">
-                <button class="nav-button" id="log-in-button">
-                    <a href="#">HELP</a>
-                </button>
-            </div>
-            <div class="r-item">
-                <button class="nav-button" id="log-in-button">
-                    <a routerLink="/account/login">LOGIN</a>
-                </button>
-            </div>
-            <div class="r-item">
-                <button class="nav-button" id="sign-up-button">
-                    <a href="#">SIGN UP</a>
-                </button>
-            </div>
-        </div>
+<div class="header-wrapper">
+  <div class="header">
+    <div class="nav">
+      <div class="logo" routerLink="/">
+        <img src="../../../assets/Images/logo1.png" alt="app-logo">
+      </div>
+      <div class="nav-list-container">
+        <ul class="nav-list">
+          <li class="nav-item" routerLink="/">Home</li>
+          <li class="nav-item" routerLink="/movies">Movies</li>
+          <li class="nav-item">Categories <i class="pi pi-angle-down"></i></li>
+        </ul>
+      </div>
     </div>
-    <div class="search-bar">
-        <select name="select-area" id="select-area">
-            <option class="select-items">Movies</option>
-            <option class="select-items">Series</option>
-            <option class="select-items">Genre</option>
-        </select>
-        <div class="search-area">
-          <app-df-input
-            cssClass="search-input"
-            iconClass="search"
-            iconPosition="left"
-            placeholder="Search for a movie, TV series or genre that you are looking for..."
-          ></app-df-input>
-        </div>
+    <div class="actions">
+      <span class="action action-assist">Help</span>
+      <div class="action-account">
+        <span class="action action-signin" routerLink="/account/login">Sign in</span>
+        <span class="action action-signup">Sign up</span>
+      </div>
     </div>
+  </div>
 </div>

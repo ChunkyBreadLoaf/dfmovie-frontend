@@ -1,130 +1,73 @@
 @import 'variables';
 
-.header {
-  padding: 0;
-  margin: auto;
-  background-color: $input-background-color;
-  width: 117rem;
-  box-sizing: border-box;
+.header-wrapper {
+  width: 100vw;
+  height: 10rem;
+  background-color: $base-secondary;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-  .navbar {
-    position: relative;
-    margin: 0;
-    padding: 3rem;
-    border-radius: 1.5rem;
+  .header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+    height: 100%;
 
-    .left-half {
+    .nav {
       display: flex;
-      margin-right: auto;
-      left: 2rem;
+      align-items: center;
+      font-size: 1.6rem;
 
       .logo {
-        width: 119px;
-        height: 58px;
-        background-image: url('../../../assets/Images/logo1.png');
-        background-repeat: no-repeat;
+        cursor: pointer;
       }
 
-      .l-item {
-        display: relative;
+      .nav-list-container {
+        padding: 1rem;
 
-        .nav-button {
-          display: block;
-          border-radius: 2rem;
-          width: 100%;
-          height: 100%;
-          background-color: inherit;
-          border: none;
-          padding: 1.5rem;
+        .nav-list {
+          display: flex;
+          list-style-type: none;
 
-          a {
-            text-decoration: none;
-            color: $input-background-text-color;
-            font-size: 1.4rem;
-          }
+          .nav-item {
+            margin: 0 1rem;
+            cursor: pointer;
+            color: $link-text-color-1;
+            transition: color 100ms ease-in-out;
 
-          i {
-            color: $input-background-text-color;
+            &:hover {
+              color: $link-text-color__hover;
+            }
           }
         }
+      }
+    }
 
-        .nav-button:hover > a,
-        i {
-          cursor: pointer;
+    .actions {
+      display: flex;
+      font-size: 1.6rem;
+
+      .action {
+        margin: 0 1rem;
+        color: $link-text-color-1;
+        cursor: pointer;
+        transition: color 100ms ease-in-out, background 100ms ease-in-out;
+
+        &:hover {
           color: $link-text-color__hover;
         }
-      }
-    }
 
-    .right-half {
-      display: flex;
-      margin-left: auto;
-      padding: 1rem 1rem;
+        &-signup {
+          outline: .2rem solid #fff;
+          padding: .5rem 1rem;
+          border-radius: 3.5rem;
+          background-color: $button-background-color;
+          color: $button-text-color;
 
-      .r-item {
-        display: block;
-        text-align: center;
-        height: 100%;
-
-        .nav-button {
-          display: block;
-          border-radius: 2rem;
-          width: 100%;
-          height: 100%;
-          background-color: inherit;
-          border: none;
-          padding: 1.5rem;
-
-          a {
-            text-decoration: none;
-            color: $input-background-text-color;
-            font-size: 1.4rem;
+          &:hover {
+            color: $button-text-color__hover;
           }
-        }
-        .nav-button:hover > a {
-          cursor: pointer;
-          color: $link-text-color__hover !important;
-        }
-
-        #sign-up-button {
-          background-color: $button-background-color !important;
-        }
-      }
-    }
-  }
-
-  .search-bar {
-    display: flex;
-    text-align: left;
-    width: 117rem;
-    height: 5rem;
-    background-color: $input-background-color;
-    border: 4px solid black;
-
-    #select-area {
-      flex: 1;
-      border: none;
-      border-right: solid 0.1rem;
-      color: $button-text-color;
-      background-color: $input-background-color;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .search-area {
-      flex: 5;
-      background-color: $input-background-color;
-
-      ::ng-deep .search-input {
-        border: none;
-        width: 100%;
-
-        * {
-          font-size: 1.6rem;
-          color: $input-background-text-color;
         }
       }
     }
