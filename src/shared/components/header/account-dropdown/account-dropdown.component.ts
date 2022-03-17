@@ -4,7 +4,7 @@ import { AuthService } from '@shared/auth/auth.service';
 import { BaseComponent } from '@shared/components/base.component';
 import { User } from '@shared/models/users.model';
 import { fromEvent } from 'rxjs';
-import { isClickedInsideRelatinglements } from './account-dropdown.utils';
+import { isClickedInsideRelatingElements } from './account-dropdown.utils';
 
 @Component({
   selector: 'app-account-dropdown',
@@ -12,7 +12,7 @@ import { isClickedInsideRelatinglements } from './account-dropdown.utils';
   styleUrls: ['./account-dropdown.component.scss'],
 })
 export class AccountDropdownComponent extends BaseComponent implements OnInit {
-  private currentUser: User;
+  private currentUser: User | undefined;
 
   @Input() trigger: HTMLElement;
   @Input() visible: boolean;
@@ -21,17 +21,17 @@ export class AccountDropdownComponent extends BaseComponent implements OnInit {
   @ViewChild('container')
   private container: ElementRef<HTMLDivElement>;
 
-  get loggedInUser(): User {
+  get loggedInUser(): User | undefined {
     return this.currentUser;
   }
 
   get isAdmin(): boolean {
-    return (this.currentUser.roles as any[]).some(
+    return (this.currentUser!.roles as any[]).some(
       (role: any) => role.name === 'Admin'
     );
   }
 
-  private set loggedInUser(user: User) {
+  private set loggedInUser(user: User | undefined) {
     this.currentUser = user;
   }
 
@@ -51,13 +51,14 @@ export class AccountDropdownComponent extends BaseComponent implements OnInit {
 
   onLogOutClick() {
     this.authService.logout();
+    this.loggedInUser = undefined;
   }
 
   private onDocumentClick(event: PointerEvent | Event): void {
     const { nativeElement } = this.container;
     let target = event.target as HTMLElement;
 
-    if (isClickedInsideRelatinglements(target, nativeElement, this.trigger)) {
+    if (isClickedInsideRelatingElements(target, nativeElement, this.trigger)) {
       return;
     }
 
@@ -65,8 +66,9 @@ export class AccountDropdownComponent extends BaseComponent implements OnInit {
   }
 
   private processUserReponseData(user: User) {
-    this.loggedInUser = user;
-    console.log(user)
+    if (!this.loggedInUser) {
+      this.loggedInUser = user;
+    }
   }
 
   private initStores(): void {

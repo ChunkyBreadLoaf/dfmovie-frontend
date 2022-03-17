@@ -1,4 +1,4 @@
-export const isClickedInsideRelatinglements = (target: HTMLElement, ...elements: HTMLElement[]): boolean => {
+export const isClickedInsideRelatingElements = (target: HTMLElement, ...elements: HTMLElement[]): boolean => {
   let targetEl = target;
 
   do {
