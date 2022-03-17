@@ -3,6 +3,7 @@ import { JWT, LoginInfoDto, ResponseResult, User } from '../models/auth.model';
 import { Inject, Injectable } from '@angular/core';
 import { API_BASE_URL } from '../shared.tokens';
 import { HttpClient } from '@angular/common/http';
+import { UsersService } from '@services/users.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,7 +16,8 @@ export class AuthService {
 
   constructor(
     @Inject(API_BASE_URL) private readonly baseURL: string,
-    private readonly http: HttpClient
+    private readonly userService: UsersService,
+    private readonly http: HttpClient,
   ) {
     this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser')!));
     this.operationCompletionNotifer = new Subject<Record<string, any>>();
@@ -39,8 +41,11 @@ export class AuthService {
         next: ({ data }) => {
           const { access_token } = data;
           const { sub, username, permissions } = parseJwt(access_token);
-          const stringifiedUser = JSON.stringify({ token: access_token, _id: sub, username, permissions });
+          const loggedInUser = { token: access_token, _id: sub, username, permissions };
+          const stringifiedUser = JSON.stringify(loggedInUser);
 
+          this.currentUserSubject.next(loggedInUser);
+          this.userService.findById(sub);
           localStorage.setItem('currentUser', stringifiedUser);
         },
         error: (err: Error) => {

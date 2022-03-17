@@ -1,0 +1,63 @@
+@import 'variables';
+
+.account-dropdown-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  top: 5.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.8rem 0;
+  border-radius: 0.5rem;
+  background: $base-primary;
+  color: $button-text-color;
+  outline: .1rem solid #30363d;
+
+  .dropdown-container {
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      transform: translateX(-30%);
+      width: 0;
+      height: 0;
+      border-left: 1rem solid transparent;
+      border-right: 1rem solid transparent;
+      border-bottom: 1rem solid black;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      height: 5.6rem;
+      border-bottom: 0.1rem solid #30363d;
+
+      span {
+        padding: 0 1.6rem;
+      }
+    }
+
+    .system-actions,
+    .logout {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      span {
+        cursor: pointer;
+        padding: 0.8rem 1.6rem;
+
+        &:hover {
+          background: $button-background-color;
+        }
+      }
+    }
+
+    .logout {
+      border-top: 0.1rem solid #30363d;
+    }
+  }
+}

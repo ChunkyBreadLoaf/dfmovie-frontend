@@ -15,8 +15,19 @@
     <div class="actions">
       <span class="action action-assist">Help</span>
       <div class="action-account">
-        <span class="action action-signin" routerLink="/account/login">Sign in</span>
-        <span class="action action-signup">Sign up</span>
+        <ng-container *ngIf="!isLoggedIn; else member">
+          <span class="action action-signin" routerLink="/account/login">Sign in</span>
+          <span class="action action-signup">Sign up</span>
+        </ng-container>
+        <ng-template #member>
+          <div #dropdownTrigger class="account-info-button" (click)="onAccountButtonClick()">
+            <i class="pi pi-user"></i>
+          </div>
+          <app-account-dropdown
+            [trigger]="dropdownTrigger"
+            [(visible)]="accountDropdownVisible"
+          ></app-account-dropdown>
+        </ng-template>
       </div>
     </div>
   </div>

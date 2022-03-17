@@ -58,9 +58,42 @@
           color: $link-text-color__hover;
         }
 
+        &-account {
+          position: relative;
+
+          .account-info-button {
+            display: flex;
+            align-items: center;
+            border-radius: 50%;
+            padding: 0.6rem;
+            margin-left: 1rem;
+            background-color: $button-background-color;
+            border: 0.1rem solid $button-text-color;
+            cursor: pointer;
+
+            i {
+              &::before {
+                color: $button-text-color;
+                font-size: 2rem;
+                transition: color 100ms ease-in-out;
+              }
+
+              &:hover::before {
+                color: $button-text-color__hover;
+              }
+            }
+          }
+        }
+
+        &-assist {
+          display: flex;
+          align-items: center;
+        }
+
         &-signup {
-          outline: .2rem solid #fff;
-          padding: .5rem 1rem;
+          outline: 0.2rem solid #fff;
+          padding: 0.5rem 1rem;
+          margin: 0 0 0 1rem;
           border-radius: 3.5rem;
           background-color: $button-background-color;
           color: $button-text-color;

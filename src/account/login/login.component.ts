@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/shared/auth/auth.service';
@@ -15,7 +14,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   isInvalid: boolean;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
     private readonly route: ActivatedRoute,
     private readonly router: Router
@@ -26,6 +24,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    if (this.authService.currentUser) {
+      this.router.navigate([returnURL]);
+
+      return;
+    }
 
     this.authService.operationCompletionNotifer$
       .pipe(takeUntil(this.ngDestroy$))
