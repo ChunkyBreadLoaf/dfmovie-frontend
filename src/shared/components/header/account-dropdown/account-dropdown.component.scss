@@ -8,7 +8,6 @@
   top: 5.2rem;
   left: 50%;
   transform: translateX(-50%);
-  padding: 0.8rem 0;
   border-radius: 0.5rem;
   background: $base-primary;
   color: $button-text-color;
@@ -32,11 +31,10 @@
     .user-info {
       display: flex;
       align-items: center;
-      height: 5.6rem;
       border-bottom: 0.1rem solid $border-color-1;
 
       span {
-        padding: 0 1.6rem;
+        padding: 0.8rem 1.6rem;
       }
     }
 
@@ -49,6 +47,14 @@
       span {
         cursor: pointer;
         padding: 0.8rem 1.6rem;
+
+        &:first-of-type {
+          margin-top: 0.8rem;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0.8rem;
+        }
 
         &:hover {
           background: $button-background-color;
