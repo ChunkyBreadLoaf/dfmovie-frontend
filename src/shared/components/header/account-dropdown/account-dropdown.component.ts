@@ -55,18 +55,20 @@ export class AccountDropdownComponent extends BaseComponent implements OnInit {
   }
 
   private onDocumentClick(event: PointerEvent | Event): void {
-    const { nativeElement } = this.container;
-    let target = event.target as HTMLElement;
+    if (this.container) {
+      const { nativeElement } = this.container;
+      const target = event.target as HTMLElement;
 
-    if (isClickedInsideRelatingElements(target, nativeElement, this.trigger)) {
-      return;
+      if (isClickedInsideRelatingElements(target, nativeElement, this.trigger)) {
+        return;
+      }
+
+      this.visibleChange.emit(false);
     }
-
-    this.visibleChange.emit(false);
   }
 
   private processUserReponseData(user: User) {
-    if (!this.loggedInUser) {
+    if (!this.loggedInUser?._id) {
       this.loggedInUser = user;
     }
   }
