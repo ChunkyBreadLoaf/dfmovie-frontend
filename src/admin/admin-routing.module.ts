@@ -5,6 +5,7 @@ import { AppRouteGuard } from 'src/shared/auth/auth-route.guard';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/admin/users' },
   {
     path: '',
     component: AdminComponent,
@@ -17,8 +18,6 @@ const routes: Routes = [
       },
     ],
   },
-
-  { path: '', redirectTo: '/users', pathMatch: 'full' },
 ];
 
 @NgModule({
