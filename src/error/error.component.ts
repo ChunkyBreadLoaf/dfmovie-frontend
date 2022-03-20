@@ -13,13 +13,13 @@ export class ErrorComponent implements OnInit {
 
   constructor(private readonly activatedRoute: ActivatedRoute) {
     this.statusCode = 404;
-    this.message = 'Page not found'
+    this.message = "Page Not Found!"
   }
 
   async ngOnInit(): Promise<void> {
     const { statusCode, message } = await firstValueFrom(this.activatedRoute.queryParams);
 
-    this.statusCode = statusCode;
-    this.message = message;
+    this.statusCode = statusCode ?? this.statusCode;
+    this.message = message ?? this.message;
   }
 }
