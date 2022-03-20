@@ -1,0 +1,14 @@
+.admin-wrapper {
+  .admin-body {
+    display: flex;
+
+    .side-menu {
+      flex: 1;
+    }
+
+    .content {
+      flex: 7;
+      padding-left: 1.6rem;
+    }
+  }
+}

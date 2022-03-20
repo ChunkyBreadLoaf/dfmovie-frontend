@@ -10,11 +10,25 @@ import { RouterModule } from '@angular/router';
 import { DfInputComponent } from './components/df-input/df-input.component';
 import { HeaderSearchBarComponent } from './components/header-search-bar/header-search-bar.component';
 import { AccountDropdownComponent } from './components/header/account-dropdown/account-dropdown.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, DfInputComponent, HeaderSearchBarComponent, AccountDropdownComponent],
-  imports: [CommonModule, HttpClientModule, RouterModule],
-  exports: [HeaderComponent, FooterComponent, DfInputComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    DfInputComponent,
+    HeaderSearchBarComponent,
+    AccountDropdownComponent,
+    SideMenuComponent,
+  ],
+  imports: [CommonModule, HttpClientModule, RouterModule, FontAwesomeModule],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    DfInputComponent,
+    SideMenuComponent,
+  ],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {

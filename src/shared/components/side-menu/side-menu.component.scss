@@ -1,0 +1,44 @@
+@import 'variables';
+
+.menu-wrapper {
+  font-size: 1.6rem;
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+
+    .nav-item {
+      padding: 0 0.8rem 0 1.6rem;
+      list-style-type: none;
+
+      &.menu-open {
+        .state-indicator {
+          transform: rotate(-90deg);
+        }
+      }
+
+      .state-indicator {
+        transition: transform 200ms ease-out;
+      }
+
+      .nav-link {
+        display: flex;
+        padding: 0.8rem 0;
+        align-items: center;
+
+        p {
+          display: flex;
+          justify-content: space-between;
+          margin-left: 0.8rem;
+          flex-grow: 1;
+        }
+      }
+
+      .nav-treeview {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+      }
+    }
+  }
+}
