@@ -1,10 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { UsersService } from '@services/users.service';
-import { AuthService } from '@shared/auth/auth.service';
-import { BaseComponent } from '@shared/components/base.component';
-import { User } from '@shared/models/users.model';
-import { fromEvent } from 'rxjs';
 import { isClickedInsideRelatingElements } from './account-dropdown.utils';
+import { BaseComponent } from '@shared/components/base.component';
+import { UsersService } from '@services/proxies';
+import { AuthService } from '@shared/auth/auth.service';
+import { fromEvent } from 'rxjs';
+import { User } from '@shared/models/users.model';
 
 @Component({
   selector: 'app-account-dropdown',

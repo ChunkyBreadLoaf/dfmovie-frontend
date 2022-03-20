@@ -1,5 +1,5 @@
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { EMPTY, Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -18,6 +18,8 @@ export class ErrorFilterInterceptor implements HttpInterceptor {
           this.router.navigate(['/error'], {
             queryParams: { statusCode, message },
           });
+
+          return EMPTY;
         }
 
         return throwError(() => new Error(JSON.stringify(error)));

@@ -17,6 +17,8 @@ const routes: Routes = [
       },
     ],
   },
+
+  { path: '', redirectTo: '/users', pathMatch: 'full' },
 ];
 
 @NgModule({
