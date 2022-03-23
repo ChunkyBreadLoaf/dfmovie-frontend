@@ -1,21 +1,18 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NavigationEnd, PRIMARY_OUTLET, Router } from '@angular/router';
-import { AuthService } from '@shared/auth/auth.service';
-import { filter } from 'rxjs';
 import { BaseComponent } from '../base.component';
+import { AuthService } from '@shared/auth/auth.service';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { menuItems } from './side-menu.constant';
 import { MenuItem } from './side-menu.model';
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
 })
-export class SideMenuComponent
-  extends BaseComponent
-  implements OnInit, AfterViewInit
-{
+export class SideMenuComponent extends BaseComponent implements OnInit {
   private readonly menuItemsMap: { [key: number]: MenuItem };
   private activatedMenuItems: MenuItem[];
 
@@ -34,8 +31,7 @@ export class SideMenuComponent
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router,
-    private readonly renderer: Renderer2
+    private readonly router: Router
   ) {
     super();
 
@@ -51,46 +47,12 @@ export class SideMenuComponent
     this.activateMenuItems(this.router.url);
   }
 
-  ngAfterViewInit(): void {
-    const { nativeElement } = this.menuChildrenEleRefs.find(
-      ({ nativeElement }) => {
-        const { parentNode } = nativeElement;
-
-        return (parentNode as HTMLElement).classList.contains('menu-open');
-      }
-    )!;
-
-    if (nativeElement) {
-      this.expandChildren(nativeElement);
-    }
-  }
-
   isMenuItemVisible(item: MenuItem): boolean {
     if (!item.permissionName) {
       return true;
     }
 
     return this.permission.includes(item.permissionName);
-  }
-
-  onItemWithChildrenClick(item: MenuItem, event: MouseEvent): void {
-    item.isCollapsed = !item.isCollapsed;
-
-    const { currentTarget } = event;
-    const { parentNode } = currentTarget as HTMLElement;
-
-    this.expandChildren(parentNode?.querySelector<HTMLUListElement>('ul')!);
-  }
-
-  private expandChildren(ele: HTMLUListElement) {
-    const { style, scrollHeight } = ele;
-    const { maxHeight } = style;
-
-    if (maxHeight && maxHeight !== '0px') {
-      this.renderer.setStyle(ele, 'maxHeight', '0px');
-    } else {
-      this.renderer.setStyle(ele, 'maxHeight', `${scrollHeight}px`);
-    }
   }
 
   private patchMenuItems(items: MenuItem[], parentId?: number): void {

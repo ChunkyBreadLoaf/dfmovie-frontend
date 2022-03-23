@@ -12,6 +12,7 @@ import { HeaderSearchBarComponent } from './components/header-search-bar/header-
 import { AccountDropdownComponent } from './components/header/account-dropdown/account-dropdown.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderSearchBarComponent,
     AccountDropdownComponent,
     SideMenuComponent,
+    AdminHeaderComponent,
   ],
   imports: [CommonModule, HttpClientModule, RouterModule, FontAwesomeModule],
   exports: [
@@ -28,6 +30,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     DfInputComponent,
     SideMenuComponent,
+    AdminHeaderComponent
   ],
 })
 export class SharedModule {

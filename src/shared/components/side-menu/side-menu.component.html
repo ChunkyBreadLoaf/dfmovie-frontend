@@ -26,7 +26,7 @@
     </a>
 
     <!-- item with children -->
-    <a *ngIf="!item.route && item.children" class="nav-link" href="javascript:;" [class.active]="item.isActive" (click)="onItemWithChildrenClick(item, $event)">
+    <a *ngIf="!item.route && item.children" class="nav-link" href="javascript:;" [class.active]="item.isActive" (click)="item.isCollapsed = !item.isCollapsed">
       <fa-icon [icon]="item.icon"></fa-icon>
       <p>
         {{ item.label }}

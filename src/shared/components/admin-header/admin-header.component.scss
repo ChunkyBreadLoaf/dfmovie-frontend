@@ -1,0 +1,41 @@
+@import 'variables';
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $base-primary;
+  padding: 1.6rem;
+  height: 10rem;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 700;
+    gap: 1rem;
+    color: $text-color;
+    user-select: none;
+    cursor: pointer;
+
+    &::before {
+      content: 'B';
+      text-shadow: 1rem -.5rem $logo-shadow-color;
+      color: $button-background-color;
+      font-size: 8rem;
+    }
+  }
+
+  .back-to-app {
+    background: $button-background-color;
+    color: $text-color;
+    font-size: 1.6rem;
+    border-radius: .3rem;
+    padding: 0.8rem 1.6rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $button-text-color__hover;
+    }
+  }
+}
